@@ -279,6 +279,40 @@ def VideoCutterSectionFrame(basepathLoad, videoName, basepathSave, fileName, sta
     return f"Images saved at \033[32m{os.path.join(basepathSave, fileName)}\033[0m"
 
 def BatchVideoLoader(folderPath):
+    """
+    Loads and returns the absolute paths of all video files within a given folder.
+
+    Parameters
+    ----------
+    folderPath : str
+        The path to the folder containing the video files.
+
+    Returns
+    -------
+    list of str
+        A list containing the absolute paths of all video files found in the given folder.
+    
+    Example
+    -------
+    >>> BatchVideoLoader('/path/to/videos')
+    ['/abs/path/to/videos/video1.mp4', '/abs/path/to/videos/video2.avi']
+    """
     files = list(os.walk(folderPath))
     abs_paths = [os.path.abspath(os.path.join(folderPath, file)) for file in files[0][2]]
     return abs_paths
+
+def BatchVideoCutterLinear (folderPathLoad, folderPathSave, timeDiff = 2, Verbose = True):
+
+    videos = BatchVideoLoader(folderPathLoad)
+
+    directory = os.path.dirname(videos[0])
+    videoNames = [os.path.basename(path) for path in videos]
+
+    print(videoNames)
+    print(directory)
+    result = []
+
+    for videoName in videoNames:
+        result.append(VideoCutterLinear(directory, videoName, folderPathSave, videoName.rsplit('.', 1)[0], timeDiff, Verbose = True))
+
+    return result
