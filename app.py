@@ -10,7 +10,7 @@
 # any derivative works or publications.
 # -----------------------------------------------------------------------------
 
-from VideoProcessor import VideoCutterLinear, VideoCutterSection, VideoCutterLinearFrame, VideoCutterSectionFrame
+from VideoProcessor import VideoCutterLinear, VideoCutterSection, VideoCutterLinearFrame, VideoCutterSectionFrame, BatchVideoLoader
 import os
 from dotenv import load_dotenv
 
@@ -47,6 +47,7 @@ result = VideoCutterLinearFrame(basepathLoad=basepathLoad,
                            )
 
 """
+"""
 result = VideoCutterSectionFrame(basepathLoad=basepathLoad,
                            videoName=videoName,
                            basepathSave=basepathSave,
@@ -54,5 +55,8 @@ result = VideoCutterSectionFrame(basepathLoad=basepathLoad,
                            startFrame=100,
                            endFrame=200
                            )
+"""
+
+result = BatchVideoLoader(os.path.join(basepathLoad))
 
 print(result)

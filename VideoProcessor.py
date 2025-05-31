@@ -277,3 +277,8 @@ def VideoCutterSectionFrame(basepathLoad, videoName, basepathSave, fileName, sta
             if Verbose: print(f"\033[32mSaved frame at\033[0m {save_path}")
     video.release()
     return f"Images saved at \033[32m{os.path.join(basepathSave, fileName)}\033[0m"
+
+def BatchVideoLoader(folderPath):
+    files = list(os.walk(folderPath))
+    abs_paths = [os.path.abspath(os.path.join(folderPath, file)) for file in files[0][2]]
+    return abs_paths
