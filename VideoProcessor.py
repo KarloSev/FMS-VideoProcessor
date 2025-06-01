@@ -310,9 +310,9 @@ def BatchVideoCutterLinear (folderPathLoad, folderPathSave, timeDiff = 2, Verbos
 
     print(videoNames)
     print(directory)
-    result = []
+    result = ''
 
     for videoName in videoNames:
-        result.append(VideoCutterLinear(directory, videoName, folderPathSave, videoName.rsplit('.', 1)[0], timeDiff, Verbose = True))
+        result = result + '\n' + VideoCutterLinear(directory, videoName, folderPathSave, videoName.rsplit('.', 1)[0], timeDiff, Verbose = True)
 
     return result
