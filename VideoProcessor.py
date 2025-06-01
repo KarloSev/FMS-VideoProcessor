@@ -303,6 +303,33 @@ def BatchVideoLoader(folderPath):
 
 def BatchVideoCutterLinear (folderPathLoad, folderPathSave, timeDiff = 2, Verbose = True):
 
+    """
+    Extracts frames from multiple video files at evenly spaced intervals and saves them as images.
+
+    Parameters
+    ----------
+    folderPathLoad : str
+        The path where the video files is located.
+    folderPathSave : str
+        The path where the image files are going to be saved.
+    timeDiff : int, optional
+        The interval in seconds between consecutive frames to extract. Default is 2 seconds.
+    Verbose : Bool, optional
+        Iteration verbose printout, default is True.
+
+    Returns
+    -------
+    str
+        A message indicating the directories where the extracted frames have been saved.
+    
+    Example
+    -------
+    >>> BatchVideoCutterLinear('/path/to/video', '/path/to/save', timeDiff=2)
+    'Images saved at /path/to/save/frames_folder1'
+    'Images saved at /path/to/save/frames_folder2'
+    'Images saved at /path/to/save/frames_folder3'
+    """
+
     videos = BatchVideoLoader(folderPathLoad)
 
     directory = os.path.dirname(videos[0])
