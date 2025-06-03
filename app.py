@@ -45,7 +45,6 @@ result = VideoCutterLinearFrame(basepathLoad=basepathLoad,
                            basepathSave=basepathSave,
                            fileName=fileName,
                            )
-
 """
 """
 result = VideoCutterSectionFrame(basepathLoad=basepathLoad,

@@ -134,7 +134,6 @@ def VideoCutterSection(basepathLoad, videoName, basepathSave, fileName, startTim
     print("\033[32mVideo processor message!\033[0m Number of seconds:", seconds)
     
     for i, idx in enumerate(tqdm(indices, desc=f"Processing frames for {  os.path.join(basepathLoad,'', fileName)}", unit="frame")):
-        print("Iteration:", i)
         video.set(cv2.CAP_PROP_POS_FRAMES, idx)
         ret, frame = video.read()
         if ret:
@@ -195,7 +194,6 @@ def VideoCutterLinearFrame(basepathLoad, videoName, basepathSave, fileName, Verb
     print("\033[32mVideo processor message!\033[0m Number of images:", total_frames)
     print("\033[32mVideo processor message!\033[0m Number of seconds:", seconds)
     for i, idx in enumerate(tqdm(indices, desc=f"Processing frames for {  os.path.join(basepathLoad,'', fileName)}", unit="frame")):
-        print("Iteration:", i)
         video.set(cv2.CAP_PROP_POS_FRAMES, idx)
         ret, frame = video.read()
         if ret:
@@ -269,7 +267,6 @@ def VideoCutterSectionFrame(basepathLoad, videoName, basepathSave, fileName, sta
     print("\033[32mVideo processor message!\033[0m Number of seconds:", seconds)
 
     for i, idx in enumerate(tqdm(indices, desc=f"Processing frames for {  os.path.join(basepathLoad,'', fileName)}", unit="frame")):
-        print("Iteration:", i)
         video.set(cv2.CAP_PROP_POS_FRAMES, idx)
         ret, frame = video.read()
         if ret:
