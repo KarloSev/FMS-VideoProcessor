@@ -7,7 +7,7 @@
 import cv2
 import os
 import numpy as np
-from rich.progress import track
+from rich.progress import track # type: ignore
 from tqdm import tqdm
 
 def VideoCutterLinear(basepathLoad, videoName, basepathSave, fileName, timeDiff = 2, Verbose = False):
