@@ -7,8 +7,10 @@
 import cv2
 import os
 import numpy as np
+from rich.progress import track
+from tqdm import tqdm
 
-def VideoCutterLinear(basepathLoad, videoName, basepathSave, fileName, timeDiff = 2, Verbose = True):
+def VideoCutterLinear(basepathLoad, videoName, basepathSave, fileName, timeDiff = 2, Verbose = False):
 
     """
     Extracts frames from a video file at evenly spaced intervals and saves them as images.
@@ -26,7 +28,7 @@ def VideoCutterLinear(basepathLoad, videoName, basepathSave, fileName, timeDiff 
     timeDiff : int, optional
         The interval in seconds between consecutive frames to extract. Default is 2 seconds.
     Verbose : Bool, optional
-        Iteration verbose printout, default is True.
+        Iteration verbose printout, default is False.
 
     Returns
     -------
@@ -59,8 +61,7 @@ def VideoCutterLinear(basepathLoad, videoName, basepathSave, fileName, timeDiff 
     print("\033[32mVideo processor message!\033[0m Indices:", indices.size)
     print("\033[32mVideo processor message!\033[0m Number of images:", N)
     print("\033[32mVideo processor message!\033[0m Number of seconds:", seconds)
-    for i, idx in enumerate(indices):
-        print("Iteration:", i)
+    for i, idx in enumerate(tqdm(indices, desc=f"Processing frames for {fileName}", unit="frame")):
         video.set(cv2.CAP_PROP_POS_FRAMES, idx)
         ret, frame = video.read()
         if ret:
@@ -71,7 +72,7 @@ def VideoCutterLinear(basepathLoad, videoName, basepathSave, fileName, timeDiff 
     return f"Images saved at \033[32m{os.path.join(basepathSave, fileName)}\033[0m"
 
 
-def VideoCutterSection(basepathLoad, videoName, basepathSave, fileName, startTime, endTime, timeDiff = 2, Verbose = True):
+def VideoCutterSection(basepathLoad, videoName, basepathSave, fileName, startTime, endTime, timeDiff = 2, Verbose = False):
 
     """
     Extracts frames from a video file at evenly spaced intervals between start time and end time, saves them as images.
@@ -132,7 +133,7 @@ def VideoCutterSection(basepathLoad, videoName, basepathSave, fileName, startTim
     print("\033[32mVideo processor message!\033[0m Number of images:", N)
     print("\033[32mVideo processor message!\033[0m Number of seconds:", seconds)
     
-    for i, idx in enumerate(indices):
+    for i, idx in enumerate(tqdm(indices, desc=f"Processing frames for {fileName}", unit="frame")):
         print("Iteration:", i)
         video.set(cv2.CAP_PROP_POS_FRAMES, idx)
         ret, frame = video.read()
@@ -143,7 +144,7 @@ def VideoCutterSection(basepathLoad, videoName, basepathSave, fileName, startTim
     video.release()
     return f"Images saved at \033[32m{os.path.join(basepathSave, fileName)}\033[0m"
 
-def VideoCutterLinearFrame(basepathLoad, videoName, basepathSave, fileName, Verbose = True):
+def VideoCutterLinearFrame(basepathLoad, videoName, basepathSave, fileName, Verbose = False):
 
     """
     Extracts all frames from a video file  and saves them as images.
@@ -193,7 +194,7 @@ def VideoCutterLinearFrame(basepathLoad, videoName, basepathSave, fileName, Verb
     print("\033[32mVideo processor message!\033[0m Indices:", indices.size)
     print("\033[32mVideo processor message!\033[0m Number of images:", total_frames)
     print("\033[32mVideo processor message!\033[0m Number of seconds:", seconds)
-    for i, idx in enumerate(indices):
+    for i, idx in enumerate(tqdm(indices, desc=f"Processing frames for {fileName}", unit="frame")):
         print("Iteration:", i)
         video.set(cv2.CAP_PROP_POS_FRAMES, idx)
         ret, frame = video.read()
@@ -204,7 +205,7 @@ def VideoCutterLinearFrame(basepathLoad, videoName, basepathSave, fileName, Verb
     video.release()
     return f"Images saved at \033[32m{os.path.join(basepathSave, fileName)}\033[0m"
 
-def VideoCutterSectionFrame(basepathLoad, videoName, basepathSave, fileName, startFrame, endFrame, Verbose = True):
+def VideoCutterSectionFrame(basepathLoad, videoName, basepathSave, fileName, startFrame, endFrame, Verbose = False):
 
     """
     Extracts selected range of frames from a video file and saves them as images.
@@ -267,7 +268,7 @@ def VideoCutterSectionFrame(basepathLoad, videoName, basepathSave, fileName, sta
     print("\033[32mVideo processor message!\033[0m Number of images:", N)
     print("\033[32mVideo processor message!\033[0m Number of seconds:", seconds)
 
-    for i, idx in enumerate(indices):
+    for i, idx in enumerate(tqdm(indices, desc=f"Processing frames for {fileName}", unit="frame")):
         print("Iteration:", i)
         video.set(cv2.CAP_PROP_POS_FRAMES, idx)
         ret, frame = video.read()
@@ -301,7 +302,7 @@ def BatchVideoLoader(folderPath):
     abs_paths = [os.path.abspath(os.path.join(folderPath, file)) for file in files[0][2]]
     return abs_paths
 
-def BatchVideoCutterLinear (folderPathLoad, folderPathSave, timeDiff = 2, Verbose = True):
+def BatchVideoCutterLinear (folderPathLoad, folderPathSave, timeDiff = 2, Verbose = False):
 
     """
     Extracts frames from multiple video files at evenly spaced intervals and saves them as images.
@@ -340,6 +341,6 @@ def BatchVideoCutterLinear (folderPathLoad, folderPathSave, timeDiff = 2, Verbos
     result = ''
 
     for videoName in videoNames:
-        result = result + '\n' + VideoCutterLinear(directory, videoName, folderPathSave, videoName.rsplit('.', 1)[0], timeDiff, Verbose = True)
+        result = result + '\n' + VideoCutterLinear(directory, videoName, folderPathSave, videoName.rsplit('.', 1)[0], timeDiff, Verbose)
 
     return result
