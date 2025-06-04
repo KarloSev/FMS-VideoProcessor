@@ -11,6 +11,7 @@
 # -----------------------------------------------------------------------------
 
 from VideoProcessor import VideoCutterLinear, VideoCutterSection, VideoCutterLinearFrame, VideoCutterSectionFrame, BatchVideoLoader, BatchVideoCutterLinear
+from FileProcessor import BatchImageRename
 import os
 from dotenv import load_dotenv
 
@@ -20,6 +21,7 @@ basepathLoad = os.getenv('BASEPATHLOAD')
 videoName = os.getenv('VIDEONAME')
 basepathSave = os.getenv('BASEPATHSAVE')
 fileName = os.getenv('FILENAME')
+imagesFilePath = os.getenv('IMAGEFILEPATH')
 
 """
 result = VideoCutterLinear(basepathLoad=basepathLoad,
@@ -59,6 +61,8 @@ result = VideoCutterSectionFrame(basepathLoad=basepathLoad,
 result = BatchVideoLoader(os.path.join(basepathLoad))
 """
 
-result = BatchVideoCutterLinear(os.path.join(basepathLoad), os.path.join(basepathSave), timeDiff=20)
+# result = BatchVideoCutterLinear(os.path.join(basepathLoad), os.path.join(basepathSave), timeDiff=20)
+
+result = BatchImageRename(imagesFilePath, shuffle=True)
 
 print(result)
