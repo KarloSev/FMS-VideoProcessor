@@ -106,6 +106,26 @@ Extracts frames from multiple video files at evenly spaced intervals and saves t
 BatchVideoCutterLinear('/path/to/videos', '/path/to/save', timeDiff=2, Verbose=True)
 ```
 
+### 7️⃣ BatchImageRename
+
+Renames all image files in a folder, optionally shuffling them, and saves them into a 'Renamed' subfolder with a sequential naming pattern.
+
+**Parameters:**
+
+* `folderPath`: Path to the folder containing image files to be renamed.
+* `prefix`: A prefix to prepend to each new image file name. Default is an empty string.
+* `shuffle`: If True, image files will be renamed in a shuffled order. Default is False.
+
+**Returns:**
+
+* A list of dictionaries with keys `'old'` and `'new_name'`, representing original absolute paths and their corresponding new file names.
+
+**Example:**
+
+```python
+BatchImageRename('/path/to/images', prefix='img_', shuffle=True)
+```
+
 ---
 
 ## License
