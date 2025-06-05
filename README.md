@@ -67,6 +67,45 @@ Extracts frames between two frame indices.
 VideoCutterSectionFrame('/path/to/video', 'video.mp4', '/path/to/save', 'frames_folder', 100, 200)
 ```
 
+### 5️⃣ BatchVideoLoader
+
+Loads and returns the absolute paths of all video files within a given folder.
+
+**Parameters:**
+
+* `folderPath`: Path to the folder containing video files.
+
+**Returns:**
+
+* A list of absolute paths to video files in the folder.
+
+**Example:**
+
+```python
+BatchVideoLoader('/path/to/videos')
+```
+
+### 6️⃣ BatchVideoCutterLinear
+
+Extracts frames from multiple video files at evenly spaced intervals and saves them as images.
+
+**Parameters:**
+
+* `folderPathLoad`: Path to the folder containing video files.
+* `folderPathSave`: Path where the extracted images will be saved.
+* `timeDiff`: Interval in seconds between consecutive frames to extract. Default is 2.
+* `Verbose`: If True, prints progress during execution. Default is False.
+
+**Returns:**
+
+* A message string indicating the directories where images have been saved.
+
+**Example:**
+
+```python
+BatchVideoCutterLinear('/path/to/videos', '/path/to/save', timeDiff=2, Verbose=True)
+```
+
 ---
 
 ## License
