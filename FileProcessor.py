@@ -3,7 +3,6 @@ import random
 import re
 import cv2
 
-# File batch rename fcn
 def BatchImageRename(folderPath, prefix='', shuffle = False):
 
     files = list(os.walk(folderPath))
@@ -11,7 +10,7 @@ def BatchImageRename(folderPath, prefix='', shuffle = False):
 
     if(shuffle): 
         secure = random.SystemRandom()
-        secure.shuffle(imageNames) # shuffle names
+        secure.shuffle(imageNames) # Shuffle names
     else:
         imageNames.sort(key=lambda x: (int(m.group()) if (m := re.search(r'\d+', x)) else float('inf'), x.lower())) # Sort by numbers and alphabetically
 
@@ -22,9 +21,7 @@ def BatchImageRename(folderPath, prefix='', shuffle = False):
     mapped_paths = []
     for i, abs_path in enumerate(abs_paths):
         image = cv2.imread(abs_path)
-        print(folderPath)
         cv2.imwrite(os.path.join(os.path.dirname(abs_path), f"Renamed", f"{prefix}{i}.jpg"), image)
         mapped_paths.append({"old": abs_path, "new_name": f"{prefix}{i}.jpg"})
-        print(i, abs_path)
 
     return mapped_paths
