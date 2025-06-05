@@ -5,6 +5,32 @@ import cv2
 
 def BatchImageRename(folderPath, prefix='', shuffle = False):
 
+    """
+    Renames all image files in a folder, optionally shuffling them, and saves them into a 'Renamed' subfolder 
+    with a sequential naming pattern.
+
+    Parameters
+    ----------
+    folderPath : str
+        The path to the folder containing image files to be renamed.
+    prefix : str, optional
+        A prefix to prepend to each new image file name (default is '').
+    shuffle : bool, optional
+        Whether to randomly shuffle the image files before renaming (default is False).
+
+    Returns
+    -------
+    list of dict
+        A list of dictionaries with keys 'old' and 'new_name', mapping each original file's absolute path to its new name.
+
+    Example
+    -------
+    >>> BatchImageRename('/path/to/images', prefix='img_', shuffle=True)
+    [{'old': '/path/to/images/image1.jpg', 'new_name': 'img_0.jpg'}, 
+     {'old': '/path/to/images/image2.jpg', 'new_name': 'img_1.jpg'}, 
+     ...]
+    """
+
     files = list(os.walk(folderPath))
     imageNames = files[0][2]
 
