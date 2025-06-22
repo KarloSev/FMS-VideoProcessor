@@ -11,7 +11,7 @@
 # -----------------------------------------------------------------------------
 
 from VideoProcessor import VideoCutterLinear, VideoCutterSection, VideoCutterLinearFrame, VideoCutterSectionFrame, BatchVideoLoader, BatchVideoCutterLinear
-from FileProcessor import BatchImageRename
+from FileProcessor import BatchImageRename, RandomSplit
 import os
 from dotenv import load_dotenv
 
@@ -63,6 +63,8 @@ result = BatchVideoLoader(os.path.join(basepathLoad))
 
 # result = BatchVideoCutterLinear(os.path.join(basepathLoad), os.path.join(basepathSave), timeDiff=20)
 
-result = BatchImageRename(imagesFilePath, shuffle=True)
+#result = BatchImageRename(imagesFilePath, shuffle=True)
+
+result = RandomSplit(imagesFilePath, split=0.75)
 
 print(result)

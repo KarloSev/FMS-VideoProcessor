@@ -51,3 +51,39 @@ def BatchImageRename(folderPath, prefix='', shuffle = False):
         mapped_paths.append({"old": abs_path, "new_name": f"{prefix}{i}.jpg"})
 
     return mapped_paths
+
+
+def RandomSplit(folderPath, split):
+
+    files = list(os.walk(folderPath))
+    imageNames = files[0][2]
+
+    secure = random.SystemRandom()
+    secure.shuffle(imageNames)
+
+    image_split_num = round(len(imageNames)*split)
+
+    split_A = imageNames[:image_split_num]
+    split_B = imageNames[image_split_num:]
+
+    abs_paths_A = [os.path.abspath(os.path.join(folderPath, file)) for file in split_A]
+    abs_paths_B = [os.path.abspath(os.path.join(folderPath, file)) for file in split_B]
+
+    print(abs_paths_A)
+    print(abs_paths_B)
+
+    split_A_dir = os.path.join(folderPath, "Split_A")
+    os.makedirs(split_A_dir, exist_ok=True)  # Create the folder
+
+    split_B_dir = os.path.join(folderPath, "Split_B")
+    os.makedirs(split_B_dir, exist_ok=True)  # Create the folder
+
+    for i, abs_path_A in enumerate(abs_paths_A):
+        image = cv2.imread(abs_path_A)
+        cv2.imwrite(os.path.join(os.path.dirname(abs_path_A), f'Split_A', os.path.basename(abs_path_A)), image)
+
+    for i, abs_path_B in enumerate(abs_paths_B):
+        image = cv2.imread(abs_path_B)
+        cv2.imwrite(os.path.join(os.path.dirname(abs_path_B), f'Split_B', os.path.basename(abs_path_B)), image)
+
+    return 0
